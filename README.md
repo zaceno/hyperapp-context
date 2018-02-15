@@ -55,7 +55,7 @@ app(state, actions, view, container)
 
 ### Create a context in your tree of components
 
-`hyperapp-context` exports a special component called `Context`. Use it anwhere in your view, or in one of your components, to create the context.
+`hyperapp-context2` exports a special component called `Context`. Use it anwhere in your view, or in one of your components, to create the context.
 
 ```jsx
 import {Context} from 'hyperapp-context2'
@@ -92,7 +92,7 @@ Note that the conventional component signature still works, for components that 
 
 ## Example
 
-One use of `hyperapp-context` is to make sure any of your components can access the app's `state` and `actions`, without the need to pass them down the component-tree as props.
+One use of `hyperapp-context2` is to make sure any of your components can access the app's `state` and `actions`, without the need to pass them down the component-tree as props.
 
 It's simply a matter of defining your view like this:
 
