@@ -3,7 +3,7 @@ function Context (props, children) {
         Object.assign(context, props)
         return children
     }
-    fn._contextScope = true
+    fn._$X = true
     return fn
 }
 
@@ -11,7 +11,7 @@ function processVTree (node, context) {
     context = context || {}
     if (node == null) return node
     if (typeof node === 'function') {
-        if (node._contextScope) context = Object.assign({}, context)
+        if (node._$X) context = Object.assign({}, context)
         return processVTree(node(context), context)
     }
     if (Array.isArray(node)) {
