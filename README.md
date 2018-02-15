@@ -1,10 +1,10 @@
 # <img height=24 src=https://cdn.rawgit.com/JorgeBucaran/f53d2c00bafcf36e84ffd862f0dc2950/raw/882f20c970ff7d61aa04d44b92fc3530fa758bc0/Hyperapp.svg> hyperapp-context 
 
-In [Hyperapp](https://hyperapp.js.org) the way to provide data to omponents is by passing it as component-properties. If your component tree is deep, and finely separated, this can quickly become repetetitive and burdensome -- and may lead to hard-to-find bugs.
+In [Hyperapp](https://hyperapp.js.org), the way to provide data to components is by passing properties to them. If your component tree is deep, and finely separated, this can quickly become repetetitive and burdensome -- and may lead to hard-to-find bugs.
 
-"Contexts" offer a complementary way of providing data to components which can remedy the situation. This library provides the tools to enable and use contexts in Hyperapp
+"Contexts" offer a *complementary* (not exclusive) way of providing data to components which can remedy the situation. This library provides the tools to enable and use contexts in Hyperapp
 
-**Note:** The package [hyperapp-context](https://www.npmjs.com/package/hyperapp-context) on npm is old and does not work with current Hyperapp (>= 1.0) . And is also not owned by me. 
+**Note:** The package [hyperapp-context](https://www.npmjs.com/package/hyperapp-context) on npm is old and does not work with current Hyperapp (>= 1.0) . And is also not owned by me. Hence the package name of this is `hyperapp-context2`. I intend to try to remedy this confusing sitation shortly.
 
 ## Installation
 
