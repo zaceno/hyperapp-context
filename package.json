@@ -1,12 +1,12 @@
 {
-  "name": "hyperapp-context",
+  "name": "hyperapp-context2",
   "version": "0.0.1",
   "description": "Context-aware Hyperapp components",
-  "main": "dist/hyperapp-context.js",
+  "main": "dist/hyperapp-context2.js",
   "module": "src/index.js",
   "scripts": {
-    "umd": "rollup src/index.js -f umd -n context -m -o dist/hyperapp-context.js",
-    "minify": "uglifyjs dist/hyperapp-context.js -o dist/hyperapp-context.js -mc --source-map includeSources,url=hyperapp-context.js.map",
+    "umd": "rollup src/index.js -f umd -n context -m -o dist/hyperapp-context2.js",
+    "minify": "uglifyjs dist/hyperapp-context2.js -o dist/hyperapp-context2.js -mc --source-map includeSources,url=hyperapp-context2.js.map",
     "build": "npm run umd && npm run minify",
     "test": "npm run build && ava test/*.js"
   },

@@ -5,7 +5,7 @@ global.document = dom.window.document
 
 import test from 'ava'
 import assert from 'assert'
-import {withContext, Context} from '../dist/hyperapp-context'
+import {withContext, Context} from '../dist/hyperapp-context2'
 import {h, app as _app} from 'hyperapp'
 const app = withContext(_app)
 

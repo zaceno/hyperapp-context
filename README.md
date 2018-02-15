@@ -4,6 +4,8 @@ In [Hyperapp](https://hyperapp.js.org) the way to provide data to omponents is b
 
 "Contexts" offer a complementary way of providing data to components which can remedy the situation. This library provides the tools to enable and use contexts in Hyperapp
 
+**Note:** The package [hyperapp-context](https://www.npmjs.com/package/hyperapp-context) on npm is old and does not work with current Hyperapp (>= 1.0) . And is also not owned by me. 
+
 ## Installation
 
 Hyperapp-context is meant to be used together with [Hyperapp](https://hyperapp.js.org). Install hyperapp-context the same way you would install Hyperapp.
@@ -11,15 +13,16 @@ Hyperapp-context is meant to be used together with [Hyperapp](https://hyperapp.j
 With npm or Yarn:
 
 <pre>
-npm i <a href=https://www.npmjs.com/package/hyperapp-context>hyperapp-context</a>
+npm i <a href=https://www.npmjs.com/package/hyperapp-context2>hyperapp-context</a>
 </pre>
 
 Then with a module bundler, use as you would anything else.
 
 ```js
 import {h, app as _app} from "hyperapp"
-import { withContext, Context } from "hyperapp-context"
+import { withContext, Context } from "hyperapp-context2"
 ```
+
 
 Alternatively, if you're not using a build environment, you can download hyperapp-context from a CDN like [unpkg.com](https://unpkg.com/hyperapp-context) and it will be globally available through the <samp>window.context</samp> object.
 
@@ -29,7 +32,7 @@ Alternatively, if you're not using a build environment, you can download hyperap
 <head>
   <meta charset="utf-8">
   <script src="https://unpkg.com/hyperapp"></script>
-  <script src="https://unpkg.com/hyperapp-context"></script>
+  <script src="https://unpkg.com/hyperapp-context2"></script>
 </head>
 </html>
 ```
@@ -42,7 +45,7 @@ Alternatively, if you're not using a build environment, you can download hyperap
 
 ```js
 import {app as _app} from 'hyperapp'
-import {withContext} from 'hyperapp-context'
+import {withContext} from 'hyperapp-context2'
 const app = withContext(_app)
 
 //...
@@ -55,7 +58,7 @@ app(state, actions, view, container)
 `hyperapp-context` exports a special component called `Context`. Use it anwhere in your view, or in one of your components, to create the context.
 
 ```jsx
-import {Context} from 'hyperapp-context'
+import {Context} from 'hyperapp-context2'
 
 const SomeComponent = props => (
     <div>
