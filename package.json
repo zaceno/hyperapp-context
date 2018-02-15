@@ -1,6 +1,6 @@
 {
   "name": "hyperapp-context2",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Context-aware Hyperapp components",
   "main": "dist/hyperapp-context2.js",
   "module": "src/index.js",
