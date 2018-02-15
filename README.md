@@ -13,7 +13,7 @@ Hyperapp-context is meant to be used together with [Hyperapp](https://hyperapp.j
 With npm or Yarn:
 
 <pre>
-npm i <a href=https://www.npmjs.com/package/hyperapp-context2>hyperapp-context</a>
+npm i <a href=https://www.npmjs.com/package/hyperapp-context2>hyperapp-context2</a>
 </pre>
 
 Then with a module bundler, use as you would anything else.
