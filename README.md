@@ -24,7 +24,7 @@ import { withContext, Context } from "hyperapp-context2"
 ```
 
 
-Alternatively, if you're not using a build environment, you can download hyperapp-context from a CDN like [unpkg.com](https://unpkg.com/hyperapp-context) and it will be globally available through the <samp>window.context</samp> object.
+Alternatively, if you're not using a build environment, you can download hyperapp-context from a CDN like [unpkg.com](https://unpkg.com/hyperapp-context2) and it will be globally available through the <samp>window.context</samp> object.
 
 ```html
 <!doctype html>
