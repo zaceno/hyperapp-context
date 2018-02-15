@@ -7,8 +7,6 @@ In [Hyperapp](https://hyperapp.js.org), the way to provide data to components is
 
 "Contexts" offer a *complementary* (not exclusive) way of providing data to components which can remedy the situation. This library provides the tools to enable and use contexts in Hyperapp
 
-**Note:** The package [hyperapp-context](https://www.npmjs.com/package/hyperapp-context) on npm is old and does not work with current Hyperapp (>= 1.0) . And is also not owned by me. Hence the package name of this is `hyperapp-context`. I intend to try to remedy this confusing sitation shortly.
-
 ## Installation
 
 Hyperapp-context is meant to be used together with [Hyperapp](https://hyperapp.js.org). Install hyperapp-context the same way you would install Hyperapp.
