@@ -1,18 +1,18 @@
 function Context (props, children) {
-    var fn = function (context) {
-        Object.assign(context, props)
+    return function (context, setContext) {
+        setContext(props)
         return children
     }
-    fn._$X = true
-    return fn
 }
 
 function processVTree (node, context) {
     context = context || {}
     if (node == null) return node
     if (typeof node === 'function') {
-        if (node._$X) context = Object.assign({}, context)
-        return processVTree(node(context), context)
+        return processVTree(
+            node(context, function (props) { context = Object.assign({}, context, props)}),
+            context
+        )
     }
     if (Array.isArray(node)) {
         node = node.map(function (n) { return processVTree(n, context)})
