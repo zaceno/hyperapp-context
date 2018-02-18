@@ -1,10 +1,3 @@
-function Context (props, children) {
-    return function (context, setContext) {
-        setContext(props)
-        return children
-    }
-}
-
 function processVTree (node, context) {
     context = context || {}
     if (node == null) return node
@@ -25,7 +18,7 @@ function processVTree (node, context) {
     return node
 }
 
-function withContext (app) {
+export default function (app) {
     return function (initialState, actionDefinitions, originalView, container) {
         var view = function (state, actions) {
             var rootNode = processVTree(originalView(state, actions))
@@ -34,5 +27,3 @@ function withContext (app) {
         return app(initialState, actionDefinitions, view, container)
     }
 }
-
-export {withContext, Context}

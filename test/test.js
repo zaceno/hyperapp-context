@@ -5,7 +5,7 @@ global.document = dom.window.document
 
 import test from 'ava'
 import assert from 'assert'
-import {withContext, Context} from '../dist/hyperapp-context'
+import withContext from '../dist/hyperapp-context'
 import {h, app as _app} from 'hyperapp'
 const app = withContext(_app)
 
@@ -13,6 +13,11 @@ function createContainer () {
     const el = document.createElement('div')
     document.body.appendChild(el)
     return el
+}
+
+const Context = (props, children) => (context, setContext) => {
+    setContext(props)
+    return children
 }
 
 test.cb('withContext allows context aware components', t => {
@@ -42,13 +47,14 @@ test.cb('props on Context are available to context-aware descendants', t => {
     },0)
 })
 
-test.cb('Context can be root-component', t => {
+test.cb('the view can write to context same as components', t => {
     const el = createContainer()
     const Component = _ => ({foo, bar}) => h('span', {id: foo}, [bar])
     const Passthru = _ => h('p', {}, [ h(Component, {}) ])
-    const view = _ => h(Context, {foo: 'foo', bar: 'bar'}, [
-        h(Passthru, {}, [])
-    ])
+    const view = _ => (_, setContext) => {
+        setContext({foo: 'foo', bar: 'bar'})
+        return h(Passthru, {}, [])
+    }
     app({}, {}, view, el)
     setTimeout(_ => {
         t.is(el.innerHTML, '<p><span id="foo">bar</span></p>')

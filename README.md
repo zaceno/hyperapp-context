@@ -5,27 +5,26 @@
 
 In [Hyperapp](https://hyperapp.js.org), the way to provide data to components is by passing properties to them. If your component tree is deep, and finely separated, this can quickly become repetetitive and burdensome -- and may lead to hard-to-find bugs.
 
-"Contexts" offer a *complementary* (not exclusive) way of providing data to components which can remedy the situation. This library provides the tools to enable and use contexts in Hyperapp
+"Contexts" offer a *complementary* (not exclusive) way of providing data to components which can remedy the situation.
+
+This "higher-order-app" (or app decorator) enables the use of context in Hyperapp-apps.
 
 ## Installation
 
-Hyperapp-context is meant to be used together with [Hyperapp](https://hyperapp.js.org). Install hyperapp-context the same way you would install Hyperapp.
-
-With npm or Yarn:
+If you're using a module bundler, install With npm or Yarn:
 
 <pre>
 npm i <a href=https://www.npmjs.com/package/hyperapp-context>hyperapp-context</a>
 </pre>
 
-Then with a module bundler, use as you would anything else.
+And then import the same way you would anything else, in the same file where you import `app` from Hyperapp
 
 ```js
 import {h, app as _app} from "hyperapp"
-import { withContext, Context } from "hyperapp-context"
+import context from "hyperapp-context"
 ```
 
-
-Alternatively, if you're not using a build environment, you can download hyperapp-context from a CDN like [unpkg.com](https://unpkg.com/hyperapp-context) and it will be globally available through the <samp>window.context</samp> object.
+Alternatively, if you're not using a module bunder, you can download hyperapp-context from a CDN like [unpkg.com](https://unpkg.com/hyperapp-context) and it will be globally available as <samp>window.context</samp>.
 
 ```html
 <!doctype html>
@@ -40,82 +39,73 @@ Alternatively, if you're not using a build environment, you can download hyperap
 
 ## Usage
 
-### Enable context-aware components
+### Enable context
 
-`hyperapp-context` exports a "higher order app" `withContext`. In order to enable context-aware components in your app, *don't* call Hyperapp's `app` directly. First, wrap it with `withContext`.
+In order to enable the context system in your app, don't call Hyperapp's `app` directly. First, wrap it with `context`.
 
 ```js
 import {app as _app} from 'hyperapp'
-import {withContext} from 'hyperapp-context'
-const app = withContext(_app)
+import context from 'hyperapp-context'
+const app = context(_app)
 
 //...
 
 app(state, actions, view, container)
 ```
 
-### Create a context in your tree of components
+### Access context in components
 
-`hyperapp-context` exports a special component called `Context`. Use it anwhere in your view, or in one of your components, to create the context.
+The "context" is a set of data available to components without the need to pass it as props from its parent-container. In order to access context-data, define your components using this signature:
 
 ```jsx
-import {Context} from 'hyperapp-context'
-
-const SomeComponent = props => (
-    <div>
-        ...
-        <Context foo={...}, bar={...}>
-            <Foo a="1" />
-            <Bar b="2" />
-        </Context>
-        ...
-    </div>
+const MyComponent = (props, children) => context => (
+    <div class={context.foo}>{context.bar}</>
 )
 ```
 
-The properties you set on the `Context` component will be available to all context-aware components, anywhere in the the tree of components below the Context specification, but *not* anywhere outside it.
+### Write to the context
 
-Adding a context inside of another context is possible. Same-named properties of the inner context override the properties of the outer context.
-
-### Make your component context-aware
-
-In order to access the context where a component is called, you must make it *context-aware*. This is done by augmenting the conventional component signature `(props, children) => VNode`, and changing it to `(props, children) => context => VNode`.
-
-This allows you to access the context properties as in this example:
+In order for a component to have access to data in the context, it must first have been written to the context, by a component higher up in the component-tree. A component can write to the context using the function provided as the second argument after the `context`.
 
 ```jsx
-const Foo => (props, children) => context => (
-    <div class={context.foo}>{context.bar}</div>
-)
+const GrandDadComponent = (props, children) => (context, setContext) => {
+    setContext({
+        foo: 'foo',
+        bar: 'bar',
+    })
+    return (
+        <div>
+        ...
+        </div>
+    )
+}
 ```
 
-Note that the conventional component signature still works, for components that don't need context. And calling a context-aware component from a regular component works too.
+The example makes `foo` and `bar` available to any decendant in the component tree.
+
+If any components even further up the tree had already defined `foo` or `bar`, this would override those values for any decendants of `GrandDadComponent`, but *siblings* would recieve the original valuues.
+
+### Define context directly in the view
+
+You can write to the context for your entire app, by setting it in your view. A common use for this is to make `state` and `actions` available to all components.
+
+```js
+
+const view = (state, actions) => (context, setContext) => {
+    setContext({state, actions})
+    return (
+        <main>
+            ...
+        </main>
+    )
+}
+
+```
+
 
 ## Example
 
-One use of `hyperapp-context` is to make sure any of your components can access the app's `state` and `actions`, without the need to pass them down the component-tree as props.
-
-It's simply a matter of defining your view like this:
-
-```jsx
-(state, actions) => (
-    <Context state={state} actions={actions}>
-        <App />
-    </Context>
-)
-```
-
-Then any of your components have access to the `state` and `actions`, if you want.
-
-```jsx
-const MyComponent = (props, children) => ({state, actions}) => (
-    <div>
-        ...
-    </div>
-)
-```
-
-This [TodoMVC example](https://codepen.io/zaceno/pen/gvGgQP?editors=0010) makes liberal (extreme, perhaps...) use of this technique.
+This [TodoMVC example](https://codepen.io/zaceno/pen/gvGgQP?editors=0010) makes liberal (extreme, perhaps...) use of context.
 
 ## License
 
