@@ -85,7 +85,7 @@ The example makes `foo` and `bar` available to any decendant in the component tr
 
 If any components even further up the tree had already defined `foo` or `bar`, this would override those values for any decendants of `GrandDadComponent`, but *siblings* would recieve the original valuues.
 
-### Define context directly in the view
+#### Define context directly in the view
 
 You can write to the context for your entire app, by setting it in your view. A common use for this is to make `state` and `actions` available to all components.
 
@@ -102,6 +102,41 @@ const view = (state, actions) => (context, setContext) => {
 
 ```
 
+#### Use a component to set context
+
+A technical limitation with the `setContext` function described above, is that it should really only be called once in a component. If called multiple times, only the last call will have an effect.
+
+If you would like to apply different contexts to different branches of descendants in a component, first define a component that can be used to set the context:
+
+```js
+const SetContext = (props, children) => (_, setContext) => {
+  setContext(props)
+  return children
+}
+
+```
+
+Now you may use this to define different contexts for different branches inside a single component/view:
+
+```jsx
+const view = (state, actions) => (
+  <SetContext state={state} actions={foo}>
+    <main>
+      <section class="toolbar">
+        <SetContext section="toolbar">
+          <FooButton />
+          <BarButton />
+        </SetContext>
+      </section>
+      <section class="main">
+        <SetContext section="main">
+          <Main />
+        </SetContext>
+      </section>
+    </main>
+  </SetContext>
+)
+```
 
 ## Example
 
