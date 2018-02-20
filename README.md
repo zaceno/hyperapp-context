@@ -1,7 +1,7 @@
 # <img height=24 src=https://cdn.rawgit.com/JorgeBucaran/f53d2c00bafcf36e84ffd862f0dc2950/raw/882f20c970ff7d61aa04d44b92fc3530fa758bc0/Hyperapp.svg> hyperapp-context 
 
 
-[![Travis CI](https://img.shields.io/travis/zaceno/hyperapp-context/master.svg)](https://travis-ci.org/zaceno/hyperapp-context) [![npm](https://img.shields.io/npm/v/hyperapp-context.svg)](https://www.npmjs.org/package/hyperapp-context)
+[![Travis CI](https://img.shields.io/travis/hypereapp/hyperapp-context/master.svg)](https://travis-ci.org/hyperapp/hyperapp-context) [![npm](https://img.shields.io/npm/v/hyperapp-context.svg)](https://www.npmjs.org/package/hyperapp-context)
 
 In [Hyperapp](https://hyperapp.js.org), the way to provide data to components is by passing properties to them. If your component tree is deep, and finely separated, this can quickly become repetetitive and burdensome -- and may lead to hard-to-find bugs.
 
