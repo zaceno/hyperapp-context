@@ -1,7 +1,7 @@
 import treeProcessor from './processor'
 
 export default function (getDecoration) {
-    return treeProcessor(function (props, children, context) {
+    return treeProcessor(function (props, children, context){
         var decoration = getDecoration(props, context)
         return children.map(function (child) {
             if (!child.attributes) return child
