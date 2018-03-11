@@ -40,11 +40,11 @@ Alternatively, if you're not using a module bunder, you can download hyperapp-co
 
 ### Enable context
 
-In order to enable the context system in your app, don't call Hyperapp's `app` directly. First, wrap it with `context`.
+In order to enable the context system in your app, don't call Hyperapp's `app` directly. First, wrap it with `withContext`.
 
 ```js
 import {app as _app} from 'hyperapp'
-import context from 'hyperapp-context'
+import {withContext} from 'hyperapp-context'
 const app = context(_app)
 
 //...
@@ -137,9 +137,102 @@ const view = (state, actions) => (
 )
 ```
 
-## Example
+
+### Example
 
 This [TodoMVC example](https://codepen.io/zaceno/pen/gvGgQP?editors=0010) makes liberal (extreme, perhaps...) use of context.
+
+## Nestable
+
+Embed hyperapp-apps in your main app, as if they were components. 
+
+Usage is exactly as in https://github.com/zaceno/hyperapp-nestable, except for these two details:
+
+Import using:
+
+```js
+import {nestable} from 'hyperapp-context'
+```
+
+These nestables are *context enabled*, meaning you get access to the external context in the nestable's view, and can share data from the component with its children, via context:
+
+```js
+const MyComponent = nestable(
+  //State
+  {...},
+
+  //Actions
+  {...},
+
+  //View
+  (state, actions) => (props, children) => (context, setContext) => {
+    setContext({...})
+    return children
+  }
+)
+```
+
+## Preprocessing the VDOM
+
+Sometimes you want a component which does not itself add anything to the virtual-dom-tree, but simply modifies it's children in some way, for example, by attaching dom handlers. For this purpose, we export `processor`
+
+```jsx
+import {processor} from 'hyperapp-context'
+
+const MyProcessor = processor((props, children, context) => {
+  /*
+    Here, props will be {foo: 'bar'}
+    children will be {nodeName: 'p', attributes: {}, children: ['bop']}
+    return whatever you want to make of this.
+  */
+})
+
+const Child = _ => context => <p>bop</p>
+
+...
+<MyProcessor foo="bar"><Child></MyProcessor>
+...
+
+```
+
+### Decorators
+
+Working directly with vnodes as in the example above is rarely necessary, and a bit rough. Most often what you
+want to do is simply to add a few event/lifecycle handers or perhaps a class to the child nodes. To facilitate
+this we export `decorator` which lets you define a processing component that does just that:
+
+```jsx
+const SelectionDecorator = decorator(({row, col}, {selection}) => ({
+    onmousedown: ev => {
+        ev.preventDefault(true)
+        selection.start({row, col})
+    },
+    onmouseup: ev => {
+        ev.preventDefault(true)
+        selection.end({row, col})
+    },
+    onmouseover: ev => {
+        ev.preventDefault(true)
+        selection.select({row, col})
+    },
+    class: selection.isSelected({row, col}) && 'selected'
+}))
+
+//...
+
+<SelectionDecorator row={i} col={j}>
+<td>{values[i][j]}</td>  
+</SelectionDecorator>
+
+//...
+```
+
+## Example
+
+This example demonstrates using a nestable as a provider of selection state and actions via the context, and decorating table cells with selection event handlers, so that you can operate on the main state using the selection
+data.
+
+https://codepen.io/zaceno/pen/vdwQdy?editors=0110
 
 ## License
 
