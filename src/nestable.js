@@ -1,3 +1,4 @@
+import resolveNode from './resolve'
 export default function (state, actions, view, tagname) {
     actions._$r = function () {return {}}
     return function (props, children) {
