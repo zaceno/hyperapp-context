@@ -20,9 +20,12 @@
     "url": "https://github.com/zaceno/hyperapp-context/issues"
   },
   "homepage": "https://github.com/zaceno/hyperapp-context#readme",
+  "peerDependencies": {
+    "hyperapp": "1.x.x"
+  },
   "devDependencies": {
     "ava": "^1.0.0-beta.3",
-    "hyperapp": "^1.1.2",
+    "hyperapp": "1.x.x",
     "jsdom": "^11.6.2",
     "rollup": "^0.52.2",
     "uglify-js": "^3.2.2"
