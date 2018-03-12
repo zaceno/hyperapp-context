@@ -19,7 +19,7 @@ export default function (state, actions, view, tagname) {
                             var node = view(s, a)
                             if (typeof node === 'function') node = node(el._$p,  el._$c)
                             node = resolveNode(node, el._$x)
-                            return node.length ? node[0] : node
+                            return (node && node.length) ? node[0] : node
                        },
                        el
                     )
