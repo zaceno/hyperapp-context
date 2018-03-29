@@ -45,7 +45,7 @@ In order to enable the context system in your app, don't call Hyperapp's `app` d
 ```js
 import {app as _app} from 'hyperapp'
 import {withContext} from 'hyperapp-context'
-const app = context(_app)
+const app = withContext(_app)
 
 //...
 
