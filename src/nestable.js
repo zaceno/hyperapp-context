@@ -38,6 +38,11 @@ export default function (state, actions, view, tagname) {
                 ondestroy: function (el) {
                     el._$u && el._$u()
                     props.ondestroy && props.ondestroy(el)
+                },
+                onremove: function (el, done) {
+                   if (!props.onremove) return done()
+    
+                   props.onremove(el, done)
                 }
             })            
         }
